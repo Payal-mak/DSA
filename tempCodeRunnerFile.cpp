@@ -1,1 +1,0 @@
-cout << "Even elements: " << even << endl << "Odd elements: " << odd << endl;
