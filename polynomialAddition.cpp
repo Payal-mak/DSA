@@ -45,7 +45,7 @@ class LinkedList{
         temp->next=temp1;
         
     }
-    void print() 
+    void display() 
 { 
     if(head==nullptr){
     cout<<"LL Does not exits";
@@ -65,7 +65,7 @@ class LinkedList{
 Node* getHead(){
     return head;
 }
-void Add_LL(Node* head1,Node* head2){
+void add_ll(Node* head1,Node* head2){
     if(head1==nullptr || head2==nullptr){
         cout<<"Any of the LL is Empty"<<endl;
         return;
@@ -101,7 +101,7 @@ void Add_LL(Node* head1,Node* head2){
         temp2=temp2->next;
         
     }
-    result.print();
+    result.display();
     return;
     
     
@@ -110,7 +110,7 @@ void Add_LL(Node* head1,Node* head2){
     
     
 
-void Sub_LL(Node* head1,Node* head2){
+void sub_ll(Node* head1,Node* head2){
     if(head1==nullptr || head2==nullptr){
         cout<<"Any of the LL is Empty"<<endl;
         return;
@@ -146,10 +146,10 @@ void Sub_LL(Node* head1,Node* head2){
         temp2=temp2->next;
         
     }
-    result.print();
+    result.display();
     return;
     }
-    void Mul_LL(Node* poly1, Node* poly2) {
+    void multiply_ll(Node* poly1, Node* poly2) {
         LinkedList result;
         
         for (Node* ptr1 = poly1; ptr1 != nullptr; ptr1 = ptr1->next) {
@@ -160,10 +160,10 @@ void Sub_LL(Node* head1,Node* head2){
                 
             }
         }
-        result.print();
+        result.display();
         return ;
     }
-    void Div_LL(Node* head1,Node* head2){
+    void div_ll(Node* head1,Node* head2){
         if(head1==nullptr || head2==nullptr){
             cout<<"Any of the LL is Empty"<<endl;
             return;
@@ -199,7 +199,7 @@ void Sub_LL(Node* head1,Node* head2){
             temp2=temp2->next;
             
         }
-        result.print();
+        result.display();
         return;
     }
     void LL_calcu(Node* head1,Node* head2){
@@ -211,19 +211,19 @@ void Sub_LL(Node* head1,Node* head2){
         {
         case 0:
 
-            result.Add_LL(head1,head2);
+            result.add_ll(head1,head2);
             break;
         case 1:
 
-            result.Sub_LL(head1,head2);
+            result.sub_ll(head1,head2);
             break;
         case 2:
 
-            result.Div_LL(head1,head2);
+            result.div_ll(head1,head2);
             break;
         case 3:
 
-            result.Mul_LL(head1,head2);
+            result.multiply_ll(head1,head2);
             break;
         
         default:
@@ -270,7 +270,7 @@ int main(){
     list.insert_at_end(8,3);
     list.insert_add(6,2);
     list.insert_add(2,3);
-    list.print();
+    list.display();
     
     return 0;
 }
