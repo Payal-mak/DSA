@@ -1,125 +1,276 @@
-#include<iostream>
+#include <iostream>
+#include <sstream>
 using namespace std;
-
 class Node{
     public:
-    int coeff;
+    int coef;
     int exp;
-    Node* next;
-    Node(int co, int ex)
-    {
-        coeff = co;
-        exp = ex;
-        next = nullptr;
+    Node *next;
+    Node(int co,int ex){
+        coef=co;
+        exp=ex;
+        
+        next=nullptr;
     }
+    
 };
-//u need to keep the head private
 class LinkedList{
     private:
+    
     Node* head;
 
-    // head = nullptr which means initially wed have 0 nodes
     public:
     LinkedList(){
-        head = nullptr;
-    }
+        head=nullptr;
 
-    void insert_at_beginning(int co, int ex)
-    {
+    }
+    void insert_at_begin(int coef,int exp){
+        Node* temp=new Node(coef,exp);
+        temp->next=head;
+        head=temp;
+    }
+    void insert_at_end(int coef,int exp){
+        Node* temp1=new Node(coef,exp);
+        if (head==nullptr)
+        {
+            head=temp1;
+            return;
+        }
         
-        Node* temp = new Node(co, ex);
-        temp -> next = head;
-        head = temp;
+        Node* temp=head;
+        while (temp->next !=nullptr)
+        {
+            temp=temp->next;
+        }
+        temp->next=temp1;
+        
+    }
+    void print() 
+{ 
+    if(head==nullptr){
+    cout<<"LL Does not exits";
+    return;
     }
 
-    void insert_at_end(int co, int ex)
+    Node* temp=head;
+    while (temp != nullptr){
+        cout<<temp->coef<<"x^"<<temp->exp<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+    
+    
+
+}
+Node* getHead(){
+    return head;
+}
+void Add_LL(Node* head1,Node* head2){
+    if(head1==nullptr || head2==nullptr){
+        cout<<"Any of the LL is Empty"<<endl;
+        return;
+    }
+    Node* temp1=head1;
+    Node* temp2=head2;
+    LinkedList result;
+    while (temp1!=nullptr && temp2!=nullptr)
     {
-        Node* new_node = new Node(co, ex);
-        if(head == nullptr){
-            head = new_node;
-            return;
+        if(temp1->exp > temp2->exp){
+            result.insert_at_end(temp2->coef,temp2->exp);
+            temp2=temp2->next;
         }
-        Node* temp = head;
-        while(temp -> next!=nullptr){
-            temp = temp -> next;
-        }
-        temp -> next = new_node;
-    }
-
-    void display()
-    {
-        if(head == nullptr){
-            cout << "The linked list1 does not exist" << endl;
-            return;
-        }
-        Node* temp = head;
-        while(temp!=nullptr){
-            cout << temp -> data<<" ";
-            temp = temp -> next;
-        }
-    }
-    Node* getHead() {  // This method returns the head of the list
-        return head;
-    }
-
-    void MergeSortedLists(Node* list1, Node* list2, LinkedList &result)
-{
-    Node* temp1 = list1;
-    Node* temp2 = list2;
-
-    while(temp1 != nullptr and temp2 != nullptr)
-    {
-        if(temp1->data < temp2->data){
-            result.insert_at_end(temp1->data);
-            temp1 = temp1->next;
+        else if(temp2->exp > temp1->exp){
+            result.insert_at_end(temp1->coef,temp1->exp);
+            temp1=temp1->next;
         }
         else{
-            result.insert_at_end(temp2->data);
-            temp2 = temp2->next;
+            result.insert_at_end((temp1->coef + temp2->coef),temp1->exp);
+            temp1=temp1->next;
+            temp2=temp2->next;
         }
     }
-
-    // Add remaining elements of temp1, if any
-    while(temp1 != nullptr)
+    while (temp1!=nullptr)
     {
-        result.insert_at_end(temp1->data);
-        temp1 = temp1->next;
+        result.insert_at_end(temp1->coef,temp1->exp);
+        temp1=temp1->next;
+        
     }
-
-    // Add remaining elements of temp2, if any
-    while(temp2 != nullptr)
+    while (temp2!=nullptr)
     {
-        result.insert_at_end(temp2->data);
-        temp2 = temp2->next;
+        result.insert_at_end(temp2->coef,temp2->exp);
+        temp2=temp2->next;
+        
     }
+    result.print();
+    return;
+    
+    
 }
 
     
+    
+
+void Sub_LL(Node* head1,Node* head2){
+    if(head1==nullptr || head2==nullptr){
+        cout<<"Any of the LL is Empty"<<endl;
+        return;
+    }
+    Node* temp1=head1;
+    Node* temp2=head2;
+    LinkedList result;
+    while (temp1!=nullptr && temp2!=nullptr)
+    {
+        if(temp1->exp > temp2->exp){
+            result.insert_at_end(temp2->coef,temp2->exp);
+            temp2=temp2->next;
+        }
+        else if(temp2->exp > temp1->exp){
+            result.insert_at_end(temp1->coef,temp1->exp);
+            temp1=temp1->next;
+        }
+        else{
+            result.insert_at_end((temp1->coef - temp2->coef),temp1->exp);
+            temp1=temp1->next;
+            temp2=temp2->next;
+        }
+    }
+    while (temp1!=nullptr)
+    {
+        result.insert_at_end(temp1->coef,temp1->exp);
+        temp1=temp1->next;
+        
+    }
+    while (temp2!=nullptr)
+    {
+        result.insert_at_end(temp2->coef,temp2->exp);
+        temp2=temp2->next;
+        
+    }
+    result.print();
+    return;
+    }
+    void Mul_LL(Node* poly1, Node* poly2) {
+        LinkedList result;
+        
+        for (Node* ptr1 = poly1; ptr1 != nullptr; ptr1 = ptr1->next) {
+            for (Node* ptr2 = poly2; ptr2 != nullptr; ptr2 = ptr2->next) {
+                int newCoeff = ptr1->coef * ptr2->coef;
+                int newExp = ptr1->exp + ptr2->exp;
+                result.insert_at_end(newCoeff,newExp);
+                
+            }
+        }
+        result.print();
+        return ;
+    }
+    void Div_LL(Node* head1,Node* head2){
+        if(head1==nullptr || head2==nullptr){
+            cout<<"Any of the LL is Empty"<<endl;
+            return;
+        }
+        Node* temp1=head1;
+        Node* temp2=head2;
+        LinkedList result;
+        while (temp1!=nullptr && temp2!=nullptr)
+        {
+            if(temp1->exp > temp2->exp){
+                result.insert_at_end(temp2->coef,temp2->exp);
+                temp2=temp2->next;
+            }
+            else if(temp2->exp > temp1->exp){
+                result.insert_at_end(temp1->coef,temp1->exp);
+                temp1=temp1->next;
+            }
+            else{
+                result.insert_at_end((temp1->coef / temp2->coef),temp1->exp);
+                temp1=temp1->next;
+                temp2=temp2->next;
+            }
+        }
+        while (temp1!=nullptr)
+        {
+            result.insert_at_end(temp1->coef,temp1->exp);
+            temp1=temp1->next;
+            
+        }
+        while (temp2!=nullptr)
+        {
+            result.insert_at_end(temp2->coef,temp2->exp);
+            temp2=temp2->next;
+            
+        }
+        result.print();
+        return;
+    }
+    void LL_calcu(Node* head1,Node* head2){
+        LinkedList result;
+        int k;
+        cout<<"0: addition, 1: substraction, 2: Division, 3: Multiplication"<<endl;
+        cin>>k;
+        switch (k)
+        {
+        case 0:
+
+            result.Add_LL(head1,head2);
+            break;
+        case 1:
+
+            result.Sub_LL(head1,head2);
+            break;
+        case 2:
+
+            result.Div_LL(head1,head2);
+            break;
+        case 3:
+
+            result.Mul_LL(head1,head2);
+            break;
+        
+        default:
+            cout<<"InValid value"<<endl;
+            break;
+        }
+        return;
+    }
+    void insert_add(int coef,int exp){
+        Node* temp1=new Node(coef,exp);
+        if (head==nullptr)
+        {
+            head=temp1;
+            return;
+        }
+        Node* trav=head;
+            while (trav!=nullptr)
+            {
+                if(trav->exp==temp1->exp){
+                    trav->coef+=temp1->coef;
+                    return;
+                }
+                trav=trav->next;
+            }
+        
+        Node* temp=head;
+        while (temp->next !=nullptr)
+        {
+            
+            
+            temp=temp->next;
+            
+
+        }
+        temp->next=temp1;
+        
+    }
+    
 };
-
-
 int main(){
-    LinkedList list1, list2, result;
-    list1.insert_at_beginning(30);
-    list1.insert_at_beginning(20);
-    list1.insert_at_beginning(10);
-    list1.insert_at_end(40);
-    cout << "List1: ";
-    list1.display();
-
-    list2.insert_at_beginning(35);
-    list2.insert_at_beginning(25);
-    list2.insert_at_beginning(15);
-    list2.insert_at_end(45);
-    cout << endl;
-    cout << "List2: ";
-    list2.display();
-    cout << endl;
-
-    result.MergeSortedLists(list1.getHead(), list2.getHead(), result);
-    cout << "Merged List: ";
-    result.display();
-    cout << endl;
-
+    LinkedList list;
+    list.insert_at_end(2,1);
+    list.insert_at_end(5,2);
+    list.insert_at_end(8,3);
+    list.insert_add(6,2);
+    list.insert_add(2,3);
+    list.print();
+    
     return 0;
 }
