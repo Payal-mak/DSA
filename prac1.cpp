@@ -93,7 +93,9 @@ class LinkedList{
         }
         return false;
     }
-    
+
+
+    //1. Count the number of Nodes in the LinkedList
     int count(int key)
     {
         Node* temp = head;
@@ -107,6 +109,22 @@ class LinkedList{
         return count;
     }
 
+    //2. Count the number of Odd and Even number of elements in the LinkedList
+    void even_odd_count()
+    {
+        Node* temp = head;
+        int even = 0;
+        int odd = 0;
+        while(temp -> next != nullptr){
+            if(temp -> data % 2 == 0){
+                even++;
+            }
+            temp = temp->next;
+        }
+        odd++;
+        cout << "Even elements: " << even << endl << "Odd elements: " << odd << endl;
+        return;
+    }
     void delete_node(int key)
     {
         Node* temp = head;
@@ -160,6 +178,7 @@ int main(){
     cout << occurence << endl;
     list.delete_node(40);
     list.display();
+    list.even_odd_count();
 
     return 0;
 }
