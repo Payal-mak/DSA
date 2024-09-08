@@ -85,7 +85,7 @@ class LinkedList{
     bool search(int key)
     {
         Node* temp = head;
-        while(temp -> next!=nullptr){
+        while(temp!=nullptr){
             if(temp -> data == key){
                 return true;
             }
@@ -100,7 +100,7 @@ class LinkedList{
     {
         Node* temp = head;
         int count = 0;
-        while(temp -> next != nullptr){
+        while(temp!= nullptr){
             if(temp -> data == key){
                 count++;
             }
@@ -115,16 +115,49 @@ class LinkedList{
         Node* temp = head;
         int even = 0;
         int odd = 0;
-        while(temp -> next != nullptr){
+        while(temp!= nullptr){
             if(temp -> data % 2 == 0){
                 even++;
             }
+            else{
+                odd++;
+            }
             temp = temp->next;
         }
-        odd++;
-        cout << "Even elements: " << even << endl << "Odd elements: " << odd << endl;
+        cout << "Even elements: " << even << endl;
+        cout << "Odd elements: " << odd << endl;
         return;
     }
+
+    //3. Split the given linkedlist into two sub linkedlists such that one linkedlist has odd elements while other has even
+    void OddEven_subLL()
+    {
+        if(head==nullptr){
+            cout<<"Linked List is empty"<<endl;
+            return;
+        }
+        LinkedList odd;
+        LinkedList even;
+        Node* temp=head;
+        while (temp!=nullptr)
+        {
+            if(temp->data%2==0){
+                even.insert_at_end(temp->data);
+            }
+            else{
+                odd.insert_at_end(temp->data);
+            }
+            temp=temp->next;
+        }
+        cout<<"Odd LL is"<<endl;
+        odd.display();
+        cout << endl;
+        cout<<"even LL is"<<endl;
+        even.display();
+        return;
+    }
+
+
     void delete_node(int key)
     {
         Node* temp = head;
@@ -163,22 +196,19 @@ class LinkedList{
 
 int main(){
     LinkedList list;
-    list.insert_at_beginning(30);
-    list.insert_at_beginning(30);
-    list.insert_at_beginning(20);
-    list.insert_at_beginning(10);
+    list.insert_at_end(50);
+    list.insert_at_end(33);
+    list.insert_at_end(20);
+    list.insert_at_end(10);
     list.insert_at_end(40);
-    list.insert_at_between(50, 3);
     list.display();
+    int key = 20;
     cout << endl;
-    int key = 30;
-    bool result = list.search(key);
-    cout << result << endl;
-    int occurence = list.count(key);
+    int occurence = list.count(key) ;
     cout << occurence << endl;
-    list.delete_node(40);
-    list.display();
+    cout << endl;
     list.even_odd_count();
+    list.OddEven_subLL();
 
     return 0;
 }
