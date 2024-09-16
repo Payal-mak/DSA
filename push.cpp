@@ -46,7 +46,7 @@ class stack{
         }
     }
 
-    void push(int val){
+    int push(int val){
         if(!isFull()){
             arr[++top] = val;
         }
@@ -55,31 +55,4 @@ class stack{
             return;
         }
     }
-
-    int pop(){
-        if(!isEmpty()){
-            int a = arr[top--];
-            return a;
-        }
-        else{
-            cout << "Stack Empty";
-            return -1;
-        }
-    }   
 };
-
-int main(){
-    stack stk(5);
-    stk.push(5);
-    stk.push(4);
-    stk.push(3);
-    stk.push(2);
-    stk.push(1);
-
-    cout << "the size of stack is: " << stk.size() << endl;
-
-    stk.pop();
-    cout << "the size of stack is: " << stk.size() << endl;
-
-    return 0;
-}

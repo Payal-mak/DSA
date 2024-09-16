@@ -67,14 +67,13 @@ class stack{
         }
     }   
 };
-
 int main(){
     stack stk(5);
     stk.push(5);
     stk.push(4);
     stk.push(3);
-    stk.push(2);
-    stk.push(1);
+    stk.pop();
+    stk.pop();
 
     cout << "the size of stack is: " << stk.size() << endl;
 
