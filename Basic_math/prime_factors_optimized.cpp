@@ -34,3 +34,6 @@ int main()
     prime_factors(n);
     return 0;
 }
+
+// T.C. = O(sqrt(n) x O(logn)
+// S.C. depends on the list
