@@ -24,6 +24,12 @@ int main()
         mpp[arr[i]]++;
     }
 
+    // map always stores the elements in the sorted order
+    for (auto it : mpp)
+    {
+        cout << it.first << "->" << it.second << endl;
+    }
+
     int q;
     cin >> q;
     while (q--)
@@ -35,3 +41,5 @@ int main()
     }
     return 0;
 }
+
+// T.C. will be reduced significantly to log(n) as the map only stores the unique elements which are present in the given array
